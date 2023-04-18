@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import '@/styles/globals.css';
 import classes from './index.css';
+// import '@/styles/globals.css';
 
 
 const MainNavigation = () => {
