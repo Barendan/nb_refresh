@@ -30,7 +30,7 @@ const Layout = ( props ) => {
   )
 }
 
-export default App = ({ Component, pageProps }) => (
+const App = ({ Component, pageProps }) => (
   <Layout>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,3 +38,5 @@ export default App = ({ Component, pageProps }) => (
     <Component {...pageProps} />
   </Layout>
 )
+
+export default App;
