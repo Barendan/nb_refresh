@@ -1,10 +1,9 @@
 import Head from 'next/head';
-// import BlogList from '../components/BlogList';
-// import styles from '@/styles/Home.module.css';
+import PostList from '../components/postList';
 
 
 const HomePage = (props) => {
-  // const data = 'random shit';
+  const data = 'random shit';
 
   return (
     <>
@@ -12,13 +11,13 @@ const HomePage = (props) => {
         <title>Namblo</title>
         <meta 
           name="description"
-          content="Thoughts and froughts"
+          content="Thoughts alots"
         />
       </Head>
-      {/* BlogList */}
+      {/* PostList */}
       {/* Login Register Buttons */}
 
-      {/* <BlogList blogs={ data } /> */}
+      <PostList blogs={ data } />
     </>
   )
 }
