@@ -4,6 +4,7 @@ import Head from 'next/head';
 // import FeaturedPosts from '../components/home-page/featured-posts'
 // import styles from '@/styles/Home.module.css';
 
+
 const HomePage = (props) => {
   return (
     <>
@@ -16,6 +17,7 @@ const HomePage = (props) => {
       </Head>
       {/* <Hero /> */}
       {/* <FeaturedPosts posts={props.posts} /> */}
+      <BlogList blogs={data} />
     </>
   )
 }

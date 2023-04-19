@@ -6,23 +6,25 @@ const PostsHandler = async (req, res) => {
   // Connect to MongoDB with Creds
   let client;
   try {
-    client = await MongoClient.connect('mongodb+srv://user238:dreamlast39@cluster0.oamha.mongodb.net/test');
-    console.log('success login to db');
+    client = await MongoClient.connect("mongodb+srv://user238:dreamlast39@cluster0.mbphrki.mongodb.net/test");
   } 
   catch (err) {
     res.status(500).json({ message: 'Could not connect to database.' })
+    // console.log('saveeeee', err)
     return;
   }
 
-  const db = client.db();
+  const db = client.db("test");
 
   if (req.method === 'GET') {
     try {
-      const result = await db.collection('posts');
+      const result = await db.collection('posts').find({}).toArray();
+      console.log('api result', result)
       return result;
     } 
     catch (err) {
       res.status(500).json({ message: 'Accessing posts failed!' })
+      console.log('err',err)
       return;
     }
   }
