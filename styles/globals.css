@@ -1,13 +1,13 @@
 @font-face {
   font-family: KGHappy;
-  src: url("../public/hinted-KGHAPPY.woff2");
+  src: url("../styles/hinted-KGHAPPY.woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: KGHappySolid;
-  src: url("../public/hinted-KGHAPPYSolid.woff2");
+  src: url("../styles/hinted-KGHAPPYSolid.woff2");
   font-weight: 400;
   font-style: normal;
 }
@@ -17,12 +17,17 @@
   height: 100%;
 }
 
+body { 
+  padding: 0;
+  margin: 0;
+}
+
 .Home {
   height: 100%;
   background-image: url('../public/images/phobackground.jpg');
   background-size: cover;
   padding: 20px;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 .main-header {
