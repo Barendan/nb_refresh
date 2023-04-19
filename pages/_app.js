@@ -1,32 +1,37 @@
 import Head from 'next/head';
-import Link from 'next/link';
 
-import classes from './index.css';
-// import '@/styles/globals.css';
+import { Container } from 'semantic-ui-react';
+import '@/styles/globals.css';
 
 
-const MainNavigation = () => {
-  return (
-    <header className={classes.header}>
-        <Link href="/">
-            <div className={classes.logo}>Namblog</div>
-        </Link>
-        <nav>
-            <ul>
-                <li><Link href="/posts">Posts</Link></li>
-                <li><Link href="/contact">Contact</Link></li>
-            </ul>
-        </nav>
-    </header>
-  )
-}
+// import Link from 'next/link';
+
+// import classes from './index.css';
+
+// const MainNavigation = () => {
+//   return (
+//     <header className={classes.header}>
+//         <Link href="/">
+//             <div className={classes.logo}>Namblog</div>
+//         </Link>
+//         <nav>
+//             <ul>
+//                 <li><Link href="/posts">Posts</Link></li>
+//                 <li><Link href="/contact">Contact</Link></li>
+//             </ul>
+//         </nav>
+//     </header>
+//   )
+// }
 
 const Layout = ( props ) => {
   return (
-    <>
-      <MainNavigation />
+    <Container fluid className="Home">
+      <div className="main-header"> 
+        Chemically Induced Dream 
+      </div>
       <main> {props.children} </main>
-    </>
+    </Container>
   )
 }
 

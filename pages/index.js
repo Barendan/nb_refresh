@@ -1,11 +1,11 @@
 import Head from 'next/head';
-
-// import Hero from '../components/home-page/hero'
-// import FeaturedPosts from '../components/home-page/featured-posts'
+// import BlogList from '../components/BlogList';
 // import styles from '@/styles/Home.module.css';
 
 
 const HomePage = (props) => {
+  // const data = 'random shit';
+
   return (
     <>
       <Head>
@@ -15,9 +15,10 @@ const HomePage = (props) => {
           content="Thoughts and froughts"
         />
       </Head>
-      {/* <Hero /> */}
-      {/* <FeaturedPosts posts={props.posts} /> */}
-      <BlogList blogs={data} />
+      {/* BlogList */}
+      {/* Login Register Buttons */}
+
+      {/* <BlogList blogs={ data } /> */}
     </>
   )
 }
