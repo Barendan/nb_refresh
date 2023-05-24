@@ -2,7 +2,7 @@ import React from 'react'
 
 function Slug() {
   return (
-    <div>[slug]</div>
+    <div>[slug] 2</div>
   )
 }
 
