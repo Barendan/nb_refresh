@@ -25,3 +25,8 @@ export async function getAllPosts() {
 
   return standardizedPosts;
 }
+
+export async function getPostById(id) {
+  const allPosts = await getAllPosts();
+  return allPosts.find((post) => post.id === id);
+}

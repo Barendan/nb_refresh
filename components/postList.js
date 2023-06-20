@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Card } from 'semantic-ui-react';
 import PostItem from './postItem';
 
-// import { connectDatabase, getAllDocuments } from '../pages/api/api-util';
 
 const PostList = ({ posts }) => {
   const [ sort, setSort ] = useState(false);
+
+  // console.log('*********************')
+  // console.log('*********************')
+  // console.log('*********************')
+  // console.log('postlist props:',posts)
 
   const postCopy = posts?.map( item => { 
     return {...item, createdAt: new Date(item.createdAt)} 
@@ -18,7 +22,7 @@ const PostList = ({ posts }) => {
   if (posts) return (
     <Card.Group>
       { sortedPosts.map( post => {
-        return <PostItem post={post} key={post._id.$oid}/>
+        return <PostItem post={post} key={post._id}/>
       })}
     </Card.Group>
   )

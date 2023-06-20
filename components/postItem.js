@@ -3,14 +3,11 @@ import { useRouter } from 'next/navigation';
 import { Card } from 'semantic-ui-react';
 // import classes from './post-item.module.css';
 
-const PostItem = (props) => {
-  const { title, createdAt, body, _id, status } = props.post;
-  const router = useRouter();
 
-  const postSlug = _id.$oid;
-  const linkPath = `/${postSlug}`;
-  
-  // console.log('props:', props.post)
+const PostItem = (props) => {
+  const { _id, title, createdAt, body, status } = props.post;
+  const router = useRouter();
+  const linkPath = `/${ _id }`;
 
   return (
     <Card 
