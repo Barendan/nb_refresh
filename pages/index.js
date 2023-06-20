@@ -1,7 +1,6 @@
 import Head from 'next/head';
-
-// import ClientPromise from '../libs/clientPromise';
 import PostList from '../components/postList';
+import { getAllPosts } from './api/api-util';
 
 const data = [
   {"_id":{"$oid":"62f1958e5d5130d465a98dd8"},"title":"The Watcher","body":"(This entry was written many years ago.)\n\nSometimes I feel like I am composed of several different energies.\n\nOne is the primal spirit. The nothing that encompasses everything. The inter-connectedness.\nTwo is the animal rage. It burns within like a fire. It likes to crackle and pop out from under the control.\nThree is the construct. The summation of 26 years of experience and attachments. The Ego.\n\nThe watcher observes this pool of energies as certain parts spew out into the external world on various occasions.\nThe watcher feels far and somewhat disconnected from the energies that bubble up so vividly. Unaffected by them. \nThe watcher provides helpful suggestions sporadically. Like a faint whisper that vibrates the strings of your dimension.","status":true,"createdAt":"8/8/2022, 7:00:30 PM","__v":{"$numberInt":"0"}},
@@ -10,9 +9,8 @@ const data = [
 ]
 
 
-
-
 const HomePage = (props) => {
+  console.log('homepage props:',props)
 
   return (
     <>
@@ -28,5 +26,18 @@ const HomePage = (props) => {
     </>
   )
 }
+
+export async function getStaticProps() {
+  const posts = await getAllPosts();
+  // console.log('getting all posts...:', posts)
+
+  return {
+    props: {
+      // posts: posts
+    },
+    revalidate: 1800
+  }
+}
+
 
 export default HomePage;

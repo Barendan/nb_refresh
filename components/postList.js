@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Card } from 'semantic-ui-react';
 import PostItem from './postItem';
 
+// import { connectDatabase, getAllDocuments } from '../pages/api/api-util';
+
 const PostList = ({ posts }) => {
   const [ sort, setSort ] = useState(false);
 
