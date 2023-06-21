@@ -1,14 +1,13 @@
 import { useState } from 'react';
-
+import { useRouter } from 'next/router';
 import { Button, Form } from 'semantic-ui-react';
 
 const NewPost = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [status, setStatus] = useState(false);
-  // const [postCreate, { loading, error }] = useMutation(CREATE_BLOG_POST, { refetchQueries: ['GetBlogPosts'] });
-  // const navigate = useNavigate();
-  
+  const router = useRouter();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const createdAt = new Date().toLocaleString();
@@ -62,8 +61,8 @@ const NewPost = () => {
             onChange={(e) => setBody(e.target.value)}
           />
 
-          {/* <Button size="large" onClick={() => navigate('/')}>Back</Button> */}
-          {/* { !loading && <Button size="large" color="green" type="submit">Add Post</Button>} */}
+          <Button size="large" onClick={() => router.back()}>Back</Button>
+          <Button size="large" color="green" type="submit">Add Post</Button>
           {/* { loading && <Button disabled size="large" color="green" type="submit">Adding Post</Button>} */}
         </Form>
       </div>

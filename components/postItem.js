@@ -1,4 +1,3 @@
-// import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Card } from 'semantic-ui-react';
 // import classes from './post-item.module.css';
