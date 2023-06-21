@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Form } from 'semantic-ui-react';
 
+import { createPost } from './api/api-util';
+
 const NewPost = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -11,18 +13,18 @@ const NewPost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const createdAt = new Date().toLocaleString();
-    const blog = { title, body, status, createdAt};
+    const post = { title, body, status, createdAt};
     
-    // postCreate({
-    //   variables: { 
-    //     "title": blog.title,
-    //     "body": blog.body,
-    //     "status": blog.status,
-    //     "createdAt": blog.createdAt
-    //   }
-    // });
+    createPost({
+      variables: { 
+        "title": post.title,
+        "body": post.body,
+        "status": post.status,
+        "createdAt": post.createdAt
+      }
+    });
 
-    // navigate('/');
+    router.push('/');
   }
 
   return (
