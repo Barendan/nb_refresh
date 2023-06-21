@@ -9,6 +9,8 @@ const PostItem = (props) => {
   const router = useRouter();
   const linkPath = `/${ _id }`;
 
+  // console.log('show id', _id)
+
   return (
     <Card 
       fluid

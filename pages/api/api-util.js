@@ -28,5 +28,5 @@ export async function getAllPosts() {
 
 export async function getPostById(id) {
   const allPosts = await getAllPosts();
-  return allPosts.find((post) => post.id === id);
+  return allPosts.find((post) => post._id === id);
 }
