@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Form } from 'semantic-ui-react';
-// import { createPost } from './api/api-util';
 
 const NewPost = () => {
   const [title, setTitle] = useState('');
