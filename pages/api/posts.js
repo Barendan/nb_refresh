@@ -48,7 +48,7 @@ const PostsHandler = async (req, res) => {
       return;
     }
 
-    client.close();
+    // client.close();
     res.status(201).json({ message: 'Succesfully stored post!', message: newPost })
   }
 

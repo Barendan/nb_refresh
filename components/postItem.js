@@ -8,19 +8,7 @@ const PostItem = (props) => {
   const router = useRouter();
   const linkPath = `/${ _id }`;
 
-  const deletePost = async (postId) => {
-    const response = await fetch(`/api/${postId}`, {
-      method: 'DELETE',
-    });
-    // const data = await response.json();
-    // console.log('deleted and what:', data)
-    // refetch posts after a delete
-  }
-
-  // console.log('show da item baus:', _id, body)
-
   return (
-    <>
     <Card 
       fluid
       onClick={() => router.push(linkPath)}
@@ -30,12 +18,7 @@ const PostItem = (props) => {
         <Card.Meta>{new Date(createdAt).toLocaleString()}</Card.Meta>
         <Card.Description className="card-body">`{body.slice(0,200)}...`</Card.Description>
       </Card.Content>
-      </Card>
-
-      <Button size="huge" color="red" onClick={() => deletePost(_id)}> 
-        Delete
-      </Button>
-    </>
+    </Card>
   )
 }
 
