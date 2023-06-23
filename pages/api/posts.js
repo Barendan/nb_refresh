@@ -1,8 +1,7 @@
 import { MongoClient } from 'mongodb';
 
-
-const PostsHandler = async (req, res) => {
-  let client;
+export const ConnectDatabase = async () => {
+  let client, db;
   try {
     client = await MongoClient.connect("mongodb+srv://user238:twogrape@cluster0.mbphrki.mongodb.net/?retryWrites=true&w=majority");
   } 
@@ -11,8 +10,12 @@ const PostsHandler = async (req, res) => {
     console.log('no connection possible:', err)
     return;
   }
-  const db = client.db("test");
 
+  return db = client.db("test");
+} 
+
+const PostsHandler = async (req, res) => {
+  const db = await ConnectDatabase();
 
   if (req.method === 'GET') {
     try {
@@ -36,7 +39,6 @@ const PostsHandler = async (req, res) => {
     const { title, body, status, createdAt } = req.body;
     const newPost = { title, body, status, createdAt }
 
-    // Add messages into DB collection
     try {
       const result = await db.collection('posts').insertOne(newPost);
       newPost.id = result.insertedId;
