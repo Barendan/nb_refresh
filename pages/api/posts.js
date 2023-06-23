@@ -1,25 +1,28 @@
 import { MongoClient } from 'mongodb';
 
 
-
 const PostsHandler = async (req, res) => {
-  // Connect to MongoDB with Creds
   let client;
   try {
-    client = await MongoClient.connect("mongodb+srv://user238:dreamlast39@cluster0.mbphrki.mongodb.net/test");
+    client = await MongoClient.connect("mongodb+srv://user238:twogrape@cluster0.mbphrki.mongodb.net/?retryWrites=true&w=majority");
   } 
   catch (err) {
     res.status(500).json({ message: 'Could not connect to database.' })
-    // console.log('saveeeee', err)
+    console.log('no connection possible:', err)
     return;
   }
-
   const db = client.db("test");
+
 
   if (req.method === 'GET') {
     try {
-      const result = await db.collection('posts').find({}).toArray();
-      console.log('api result', result)
+      const result = await db
+      .collection('posts')
+      .find()
+      .sort()
+      .toArray();
+
+      console.log('api result:', result)
       return result;
     } 
     catch (err) {
@@ -30,31 +33,22 @@ const PostsHandler = async (req, res) => {
   }
 
   if (req.method === 'POST') {
-    const { email, name, message } = req.body;
-    
-    if (!email || !email.includes('@') || !name || !name.trim() === '' || !message || message.trim() === '' ) {
-      res.status(422).json({ message: 'Invalid input.' });
-      return;
-    }
-
-    const newMessage = {
-      email, name, message
-    }
+    const { title, body, status, createdAt } = req.body;
+    const newPost = { title, body, status, createdAt }
 
     // Add messages into DB collection
     try {
-      const result = await db.collection('messages').insertOne(newMessage);
-      newMessage.id = result.insertedId;
+      const result = await db.collection('posts').insertOne(newPost);
+      newPost.id = result.insertedId;
     } 
     catch (err) {
-      res.status(500).json({ message: 'Storing message failed!' })
+      res.status(500).json({ message: 'Storing post failed!' })
       return;
     }
 
     client.close();
-    res.status(201).json({ message: 'Succesfully stored message!', message: newMessage })
+    res.status(201).json({ message: 'Succesfully stored post!', message: newPost })
   }
-
 
 }
 
