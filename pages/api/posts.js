@@ -22,8 +22,8 @@ const PostsHandler = async (req, res) => {
       .sort()
       .toArray();
 
-      console.log('api result:', result)
-      return result;
+      // console.log('api result:', result)
+      res.status(201).json({ message: 'Success!', posts: result })
     } 
     catch (err) {
       res.status(500).json({ message: 'Accessing posts failed!' })

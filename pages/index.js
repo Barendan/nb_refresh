@@ -1,12 +1,23 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import PostList from '../components/postList';
-import { getAllPosts } from './api/api-util';
-
 import { Container, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 
-const HomePage = ( {posts} ) => {
+
+const HomePage = () => {
+  const [posts, setPosts] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    loadPostHandler();
+  }, [])
+
+  const loadPostHandler = () => {
+    fetch('/api/posts')
+    .then((res) => res.json())
+    .then((data) => setPosts(data.posts))
+  }
 
   return (
     <Container className="Home">
@@ -40,16 +51,16 @@ const HomePage = ( {posts} ) => {
   )
 }
 
-export async function getStaticProps() {
-  const posts = await getAllPosts();
+// export async function getStaticProps() {
+//   const posts = await getAllPosts();
 
-  return {
-    props: {
-      posts: posts
-    },
-    revalidate: 1800
-  }
-}
+//   return {
+//     props: {
+//       posts: posts
+//     },
+//     revalidate: 1800
+//   }
+// }
 
 
 export default HomePage;
