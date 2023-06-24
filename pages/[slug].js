@@ -46,7 +46,7 @@ function PostDetailPage( {post} ) {
     });
     // const data = await response.json();
     // console.log('a submit done happened:', data)
-
+    router.reload();
     setEditActive(false);
   }
 
@@ -61,7 +61,7 @@ function PostDetailPage( {post} ) {
         <Container fluid className="Home">
 
         { editActive ? (
-          <div>
+          <Container>
             <p className="main-header">Edit your post</p>
             <div className="form-container">
               <Form onSubmit={handleSubmit}>
@@ -69,12 +69,12 @@ function PostDetailPage( {post} ) {
                 <Form.Field>
                   <label>Post Title</label>
                   <input
-                      type="text"
-                      required
-                      placeholder='Enter a title'
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                      />
+                    type="text"
+                    required
+                    placeholder='Enter a title'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    />
                 </Form.Field>
 
                 <Form.Field 
@@ -108,7 +108,7 @@ function PostDetailPage( {post} ) {
 
               </Form>
             </div>
-          </div>
+          </Container>
         ) :
           <Container className="item-container">
             
@@ -150,11 +150,18 @@ function PostDetailPage( {post} ) {
     )
   }
 
-  return (
+  if (post === null) return (
     <Container>
       <h1>Post is not available at this time.</h1>
     </Container>
   )
+
+  return (
+    <Container>
+      <h1>Loading post...</h1>
+    </Container>
+  )
+
 }
 
 export async function getStaticProps(context) {
