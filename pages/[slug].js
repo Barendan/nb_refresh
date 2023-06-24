@@ -20,7 +20,9 @@ function PostDetailPage( {post} ) {
     });
     const data = await response.json();
     console.log('deleted:', data._id, data.title);
-    // refetch posts after a delete
+
+    router.push('/');
+    setOpen(false);
   }
 
   const handleUpdate = () => {
@@ -148,7 +150,11 @@ function PostDetailPage( {post} ) {
     )
   }
 
-  return <p>Loading...</p>
+  return (
+    <Container>
+      <h1>Post is not available at this time.</h1>
+    </Container>
+  )
 }
 
 export async function getStaticProps(context) {
@@ -156,10 +162,11 @@ export async function getStaticProps(context) {
   const { slug } = params;
 
   const postData = await getPostById(slug);
-  // console.log('post data:', postData)
+  
+
   return {
     props: {
-      post: postData
+      post: postData ? postData : null
     },
     revalidate: 600
   }
