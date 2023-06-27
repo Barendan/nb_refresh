@@ -1,18 +1,25 @@
 import Head from 'next/head';
-import { useState, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Container, TextArea, Confirm, Button, Header, Form, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { getPostById } from './api/api-util';
 
 
-function PostDetailPage( {post} ) {
-  const [id, setId ] = useState('');
+function PostDetailPage() {
+  const [post, setPost] = useState('');
+  const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [status, setStatus] = useState(false);
   const [editActive, setEditActive] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    fetch('/api/post')
+    .then((res) => res.json())
+    .then((data) => setPost(data.posts))
+  }, [])
   
   const handleDelete = async () => {
     const response = await fetch(`/api/${post._id}`, {
@@ -173,7 +180,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      post: postData ? postData : null
+      // post: postData ? postData : null
     },
     revalidate: 600
   }
@@ -191,5 +198,14 @@ export async function getStaticPaths() {
     fallback: true
   }
 }
+
+// export async function getServerSideProps(context) {
+//   const { params } = context;
+
+//   return {
+//     props: 
+
+//   }
+// }
 
 export default PostDetailPage
