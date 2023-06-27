@@ -20,7 +20,7 @@ const HomePage = () => {
   }
 
   return (
-    <Container className="Home">
+    <Container className="main-body">
       <Head>
         <title>Namblo</title>
         <meta 

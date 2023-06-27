@@ -23,20 +23,27 @@ body {
 }
 
 .Home {
-  /* height: 100%; */
-  height: 100vh;
   background-image: url('../public/images/phobackground.jpg');
   background-size: cover;
   padding: 20px;
+  min-height: 100vh;
   /* overflow: scroll; */
 }
 
 .main-header {
   font-family: KGHappy;
-  font-size: 10vmin;
-  line-height: 8vmin;
+  font-size: 8vmin;
+  line-height: 5vmin;
   text-align: center;
   margin-bottom: 5vmin;
+}
+
+.sub-header {
+  font-family: KGHappy;
+  font-size: 4vmin;
+  text-align: center;
+  margin-bottom: 1vmin;
+  letter-spacing: -4px;
 }
 
 .main-body {
@@ -46,13 +53,13 @@ body {
 
 @media only screen and (min-width: 768px) {
   .main-body {
-    max-width: 80%;
+    max-width: 75% !important;
   }
 }
 
 @media only screen and (min-width: 1025px) {
   .main-body {
-    max-width: 70%;
+    max-width: 65% !important;
   }
 }
 
@@ -73,19 +80,13 @@ body {
   padding: 20px;
 }
 
-/* .card-header {
-  font-size: 34px !important;
-  font-family: KGHappy !important;
-  font-weight: 300 !important;
-} */
-
 .form-container {
   background-color: white;
-  width: 50%;
+  width: 55%;
   /* height: 30%; */
-  padding: 30px;
-  /* margin-left: auto; */
-  /* margin-right: auto; */
+  padding: 15px 30px;
+  margin-left: auto;
+  margin-right: auto;
   font-family: KGHappySolid;
 }
 
@@ -99,22 +100,18 @@ body {
 }
 
 .ui.container {
-  /* background-color: white; */
-  /* max-width: 800px !important; */
-  /* padding: 26px; */
   margin-left: auto !important;
   margin-right: auto !important;
-  /* margin-bottom: 26px; */
 }
 
 textarea {
-  min-height: 70vh !important;
+  min-height: 40vh !important;
+  height: 100%;
   width: 100% !important;
 }
 
 .container textarea {
   background-color: rgb(251 219 212);
-  /* border: 0 !important; */
   margin-bottom: 10px;
 }
 
@@ -123,9 +120,8 @@ textarea {
 }
 
 .container textarea {
-  /* font-family: KGHappySolid; */
   color: #494949;
   font-weight: 100 !important;
   /* letter-spacing: 0.5px; */
-  /* line-height: 20px; */
+  line-height: 26px;
 }

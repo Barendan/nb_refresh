@@ -7,10 +7,10 @@ import '@/styles/globals.css';
 const Layout = ( props ) => {
   return (
     <Container fluid className="Home">
-      <div className="main-header"> 
-        Chemically Induced Dream 
+      <div className="main-header">
+        Chemically <br/>Induced<br/> Dream 
       </div>
-      <main> {props.children} </main>
+      <div className="main-body"> {props.children} </div>
     </Container>
   )
 }

@@ -5,8 +5,8 @@ import { Container, TextArea, Confirm, Button, Header, Form, Dimmer, Loader, Mes
 import { getPostById } from './api/api-util';
 
 
-function PostDetailPage() {
-  const [post, setPost] = useState('');
+function PostDetailPage({post}) {
+  // const [post, setPost] = useState('');
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -15,11 +15,11 @@ function PostDetailPage() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    fetch('/api/post')
-    .then((res) => res.json())
-    .then((data) => setPost(data.posts))
-  }, [])
+  // useEffect(() => {
+  //   fetch('/api/post')
+  //   .then((res) => res.json())
+  //   .then((data) => setPost(data.posts))
+  // }, [])
   
   const handleDelete = async () => {
     const response = await fetch(`/api/${post._id}`, {
@@ -65,12 +65,12 @@ function PostDetailPage() {
           <meta name="description" content={post.excerpt} />
         </Head>
         
-        <Container fluid className="Home">
+        <Container fluid className="">
 
         { editActive ? (
           <Container>
-            <p className="main-header">Edit your post</p>
             <div className="form-container">
+              <p className="sub-header">Edit your post</p>
               <Form onSubmit={handleSubmit}>
 
                 <Form.Field>
@@ -180,7 +180,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      // post: postData ? postData : null
+      post: postData ? postData : null
     },
     revalidate: 600
   }

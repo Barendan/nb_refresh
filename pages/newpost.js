@@ -30,8 +30,8 @@ const NewPost = () => {
     <div className="create">
       {/* { isLoading && <div>Loading...</div> } */}
 
-      <p className="main-header">Add a New Post</p>
       <div className="form-container">
+        <p className="sub-header">Add a New Post</p>
         <Form onSubmit={handleSubmit}>
 
           <Form.Field required>
