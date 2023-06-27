@@ -2,11 +2,11 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Container, TextArea, Confirm, Button, Header, Form, Dimmer, Loader, Message } from 'semantic-ui-react';
-import { getPostById } from './api/api-util';
+// import { getPostById } from './api/api-util';
 
 
-function PostDetailPage({post}) {
-  // const [post, setPost] = useState('');
+function PostDetailPage( {postId} ) {
+  const [post, setPost] = useState('');
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -15,11 +15,12 @@ function PostDetailPage({post}) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   fetch('/api/post')
-  //   .then((res) => res.json())
-  //   .then((data) => setPost(data.posts))
-  // }, [])
+  useEffect(() => {
+    fetch(`/api/${postId}`)
+    .then((res) => res.json())
+    .then((data) => setPost(data))
+    .catch((err) => console.log('error when fetching single post:', err));
+  }, [])
   
   const handleDelete = async () => {
     const response = await fetch(`/api/${post._id}`, {
@@ -171,41 +172,40 @@ function PostDetailPage({post}) {
 
 }
 
-export async function getStaticProps(context) {
-  const { params } = context;
-  const { slug } = params;
-
-  const postData = await getPostById(slug);
-  
-
-  return {
-    props: {
-      post: postData ? postData : null
-    },
-    revalidate: 600
-  }
-}
-
-export async function getStaticPaths() {
-
-  return {
-    paths: [
-      { params: { slug: '6346e15e5410cdbca148fd3d' } },
-      { params: { slug: '633e56844cae3e28ad6d0697' } },
-      { params: { slug: '631e1ac0b2751dfe6dd9ab7e' } }
-    ],
-    // fallback: "blocking"
-    fallback: true
-  }
-}
-
-// export async function getServerSideProps(context) {
+// export async function getStaticProps(context) {
 //   const { params } = context;
+//   const { slug } = params;
+
+//   const postData = await getPostById(slug);
 
 //   return {
-//     props: 
-
+//     props: {
+//       // post: postData ? postData : null
+//     },
+//     revalidate: 600
 //   }
 // }
+
+// export async function getStaticPaths() {
+
+//   return {
+//     paths: [
+//       { params: { slug: '6346e15e5410cdbca148fd3d' } },
+//       { params: { slug: '633e56844cae3e28ad6d0697' } },
+//       { params: { slug: '631e1ac0b2751dfe6dd9ab7e' } }
+//     ],
+//     // fallback: "blocking"
+//     fallback: true
+//   }
+// }
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const postId = params.slug;
+
+  return {
+    props: { postId }
+  }
+}
 
 export default PostDetailPage

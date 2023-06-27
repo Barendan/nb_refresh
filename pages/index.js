@@ -45,8 +45,6 @@ const HomePage = () => {
           onClick={() => router.push('/newpost') }
         >Post New Blog </Button>
       </div>
-
-
     </Container>
   )
 }
@@ -61,6 +59,5 @@ const HomePage = () => {
 //     revalidate: 1800
 //   }
 // }
-
 
 export default HomePage;
