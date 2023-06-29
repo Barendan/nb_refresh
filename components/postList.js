@@ -22,7 +22,8 @@ const PostList = ({ posts }) => {
   if (posts) return (
     <Card.Group>
       { sortedPosts.map( post => {
-        return <PostItem post={post} key={post._id}/>
+        // console.log('posty returns:', post)
+        return post.status && <PostItem post={post} key={post._id}/>
       })}
     </Card.Group>
   )
