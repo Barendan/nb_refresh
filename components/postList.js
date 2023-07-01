@@ -3,7 +3,7 @@ import { Card } from 'semantic-ui-react';
 import PostItem from './postItem';
 
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, user }) => {
   const [ sort, setSort ] = useState(false);
 
   // console.log('*********************')
@@ -22,8 +22,11 @@ const PostList = ({ posts }) => {
   if (posts) return (
     <Card.Group>
       { sortedPosts.map( post => {
+        return user ? <PostItem post={post} key={post._id}/> : (
+          post.status && <PostItem post={post} key={post._id}/>
+        )
         // console.log('posty returns:', post)
-        return post.status && <PostItem post={post} key={post._id}/>
+        // return post.status && <PostItem post={post} key={post._id}/>
       })}
     </Card.Group>
   )

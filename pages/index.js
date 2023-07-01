@@ -29,7 +29,7 @@ const HomePage = () => {
         />
       </Head>
 
-      <PostList posts={posts} />
+      <PostList posts={posts} user={"BigDanBob"} />
       <hr style={{marginTop: 30}} />
 
       <div>
