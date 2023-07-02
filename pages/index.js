@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import PostList from '../components/postList';
 import { Container, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
-
+import { AuthContext } from '../libs/authContext';
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([]);
+  const { user, logout } = useContext(AuthContext);
+  const [ posts, setPosts ] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     loadPostHandler();
+    console.log('started bra:', user)
   }, [])
 
   const loadPostHandler = () => {
@@ -29,22 +31,31 @@ const HomePage = () => {
         />
       </Head>
 
-      <PostList posts={posts} user={"BigDanBob"} />
+      <PostList posts={posts} user={ user } />
       <hr style={{marginTop: 30}} />
 
-      <div>
-        <hr/><br/>
-        {/* <Button
-          color="red"
+      { posts && user ? (
+        <div>
+          <hr/><br/>
+          <Button
+            color="red"
+            size="huge"
+            onClick={logout}
+          > Logout </Button>
+          <Button 
+            primary
+            size="huge" 
+            onClick={() => router.push('/newpost') }
+          >Post New Blog </Button>
+        </div>
+      ) : (
+        <Button
+          color="green"
           size="huge"
-          onClick={onLogout}
-        > Logout </Button> */}
-        <Button 
-          primary
-          size="huge" 
-          onClick={() => router.push('/newpost') }
-        >Post New Blog </Button>
-      </div>
+          style={{ marginTop: 20 }}
+          onClick={() => setShowLogin(true)}
+        > Login </Button>
+      )}
     </Container>
   )
 }

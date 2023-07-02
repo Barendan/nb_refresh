@@ -1,5 +1,6 @@
 import Head from 'next/head';
 
+import { AuthProvider } from '../libs/authContext';
 import { Container } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css'
 import '@/styles/globals.css';
@@ -16,12 +17,14 @@ const Layout = ( props ) => {
 }
 
 const App = ({ Component, pageProps }) => (
-  <Layout>
-    <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </Head>
-    <Component {...pageProps} />
-  </Layout>
+  <AuthProvider>
+    <Layout>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <Component {...pageProps} />
+    </Layout>
+  </AuthProvider>
 )
 
 export default App;
