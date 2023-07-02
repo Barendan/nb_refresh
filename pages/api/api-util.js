@@ -1,8 +1,9 @@
 import { MongoClient } from 'mongodb';
 
+
 async function connectDatabase() {
-  const client = await MongoClient.connect('mongodb+srv://user238:twogrape@cluster0.mbphrki.mongodb.net/?retryWrites=true&w=majority');
-  console.log('Connected to MongoDB.');
+  const uri = process.env.local.MONGODB_URI;
+  const client = await MongoClient.connect(uri);
 
   return client;
 }
