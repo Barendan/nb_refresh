@@ -1,13 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
-import PostList from '../components/postList';
-import { Container, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { AuthContext } from '../libs/authContext';
+import PostList from '../components/postList';
+import UserLogin from '../components/userLogin';
+import { Container, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
+
 
 const HomePage = () => {
   const { user, logout } = useContext(AuthContext);
   const [ posts, setPosts ] = useState([]);
+  const [ showLogin, setShowLogin ] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -56,6 +59,8 @@ const HomePage = () => {
           onClick={() => setShowLogin(true)}
         > Login </Button>
       )}
+
+      <UserLogin show={showLogin} onClose={() => setShowLogin(false)} />
     </Container>
   )
 }

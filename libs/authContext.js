@@ -32,21 +32,21 @@ const authReducer = (state, action) => {
 function AuthProvider (props) {
   const [state, dispatch] = useReducer(authReducer, initialState)
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      console.log('storage:', localStorage.getItem("token"))
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     console.log('storage:', localStorage.getItem("token"))
       
-      if (localStorage.getItem("token")) {
-        const decodedToken = jwtDecode(localStorage.getItem("token"));
+  //     if (localStorage.getItem("token")) {
+  //       const decodedToken = jwtDecode(localStorage.getItem("token"));
     
-        if (decodedToken.exp * 1000 < Date.now()) {
-            localStorage.removeItem("token");
-        } else {
-            initialState.user = decodedToken;
-        }
-      }
-    }
-  }, [])
+  //       if (decodedToken.exp * 1000 < Date.now()) {
+  //           localStorage.removeItem("token");
+  //       } else {
+  //           initialState.user = decodedToken;
+  //       }
+  //     }
+  //   }
+  // }, [])
 
   const login = (userData) => {
     localStorage.setItem("token", userData.token);
