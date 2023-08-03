@@ -1,6 +1,4 @@
 import React, { useEffect, useReducer, createContext } from 'react';
-import jwtDecode from 'jwt-decode';
-
 
 const initialState = {
   user: null
@@ -34,22 +32,25 @@ function AuthProvider (props) {
 
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
-  //     console.log('storage:', localStorage.getItem("token"))
+  //     console.log('outside:', localStorage.getItem("token"))
       
-  //     if (localStorage.getItem("token")) {
+  //     if (localStorage.getItem("token") !== "undefined") {
+  //       console.log('inside:', localStorage.getItem("token"))
+
   //       const decodedToken = jwtDecode(localStorage.getItem("token"));
-    
   //       if (decodedToken.exp * 1000 < Date.now()) {
   //           localStorage.removeItem("token");
   //       } else {
   //           initialState.user = decodedToken;
   //       }
   //     }
+
   //   }
   // }, [])
 
   const login = (userData) => {
-    localStorage.setItem("token", userData.token);
+    console.log('login creds', userData)
+    localStorage.setItem("token", userData.email);
     dispatch({
       type: 'LOGIN',
       payload: userData
