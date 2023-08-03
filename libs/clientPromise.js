@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+// Currently unused
 
 const uri = process.env.MONGODB_URI
 const options = {

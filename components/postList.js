@@ -6,11 +6,6 @@ import PostItem from './postItem';
 const PostList = ({ posts, user }) => {
   const [ sort, setSort ] = useState(false);
 
-  // console.log('*********************')
-  // console.log('*********************')
-  // console.log('*********************')
-  // console.log('postlist props:',posts)
-
   const postCopy = posts?.map( item => { 
     return {...item, createdAt: new Date(item.createdAt)} 
   });

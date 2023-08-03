@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react';
-import { Button, Form, Input, Message, Modal } from 'semantic-ui-react';
-import { AuthContext } from '../libs/authContext';
+import { useState } from 'react';
+import { signIn } from "next-auth/react";
 import { useForm } from '../libs/customHooks';
+import { Button, Form, Input, Message, Modal } from 'semantic-ui-react';
 
 
 const UserLogin = ({ show, onClose }) => {
-  const context = useContext(AuthContext);
   const [ errors, setErrors ] = useState([]);
   
   function loginUserCallback() {
-    loginUser();
+    // loginUser();
+    signIn();
   }
   
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
@@ -17,10 +17,10 @@ const UserLogin = ({ show, onClose }) => {
     password: '',
   })
 
-  const loginUser = () => {
-    context.login(values);
-    closeErrors();
-  }
+  // const loginUser = () => {
+  //   context.login(values);
+  //   closeErrors();
+  // }
 
   const closeErrors = () => {
     setErrors([]);

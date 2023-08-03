@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { Container, TextArea, Confirm, Button, Header, Form, Dimmer, Loader, Message } from 'semantic-ui-react';
-// import { getPostById } from './api/api-util';
+import { useSession } from 'next-auth/react';
 
 
 function PostDetailPage( {postId} ) {
@@ -14,6 +14,9 @@ function PostDetailPage( {postId} ) {
   const [editActive, setEditActive] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  // const { user } = useContext(AuthContext);
+  const { data: session } = useSession();
+
 
   useEffect(() => {
     fetch(`/api/${postId}`)
@@ -66,83 +69,89 @@ function PostDetailPage( {postId} ) {
           <meta name="description" content={post.excerpt} />
         </Head>
         
-        <Container fluid className="">
+        <Container fluid>
 
-        { editActive ? (
-          <Container>
-            <div className="form-container">
-              <p className="sub-header">Edit your post</p>
-              <Form onSubmit={handleSubmit}>
+          { editActive && session.user.email === "barendan@gmail.com" ? (
+            <Container>
+              <div className="form-container">
+                <p className="sub-header">Edit your post</p>
+                <Form onSubmit={handleSubmit}>
 
-                <Form.Field>
-                  <label>Post Title</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder='Enter a title'
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    />
-                </Form.Field>
+                  <Form.Field>
+                    <label>Post Title</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder='Enter a title'
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      />
+                  </Form.Field>
 
-                <Form.Field 
-                  label='Status' 
-                  control='select'
-                  defaultValue={status}
-                  onChange={(e) => setStatus(!!e.target.value)}
-                >
-                  <option value=''>Draft</option>
-                  <option value='true'>Publish</option>
-                </Form.Field>
+                  <Form.Field 
+                    label='Status' 
+                    control='select'
+                    defaultValue={status}
+                    onChange={(e) => setStatus(!!e.target.value)}
+                  >
+                    <option value=''>Draft</option>
+                    <option value='true'>Publish</option>
+                  </Form.Field>
 
-                <Form.TextArea 
-                  label='Post Content' 
-                  placeholder='Write your heart out...' 
-                  value={body}
-                  onChange={(e) => setBody(e.target.value)}
-                />
+                  <Form.TextArea 
+                    label='Post Content' 
+                    placeholder='Write your heart out...' 
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                  />
 
-                <Button size="huge" onClick={() => setEditActive(false)}>
+                  <Button size="huge" onClick={() => setEditActive(false)}>
+                    Back
+                  </Button>
+
+                  <Button color="green" size="huge" type="submit">
+                    Update Post
+                  </Button>
+
+                  {/* { loading && <Button disabled color="green" size="huge" type="submit">
+                    Updating Post
+                  </Button> } */}
+
+                </Form>
+              </div>
+            </Container>
+          ) : post && 
+            <Container className="item-container">
+              
+              <Header size="huge" className="item-header">
+                {post.title}
+                <Header.Subheader>
+                  <i>{post.createdAt}</i>
+                </Header.Subheader>
+              </Header>
+
+              <TextArea className="item-body" value={post.body}/>
+                  
+              { session?.user.email === "barendan@gmail.com" ? (
+                <div>
+                  <Button size="huge" onClick={() => router.back()}>
+                    Back
+                  </Button>
+                  <Button size="huge" color="green" onClick={() => handleUpdate()}>
+                    Edit
+                  </Button>
+                  <Button size="huge" color="red" onClick={() => setOpen(true)}> 
+                    Delete
+                  </Button>
+                </div>
+              ) : (
+                <Button size="huge" onClick={() => router.back()}>
                   Back
                 </Button>
-
-                <Button color="green" size="huge" type="submit">
-                  Update Post
-                </Button>
-
-                {/* { loading && <Button disabled color="green" size="huge" type="submit">
-                  Updating Post
-                </Button> } */}
-
-              </Form>
-            </div>
-          </Container>
-        ) :
-          <Container className="item-container">
-            
-            <Header size="huge" className="item-header">
-              {post.title}
-              <Header.Subheader>
-                <i>{post.createdAt}</i>
-              </Header.Subheader>
-            </Header>
-
-            <TextArea className="item-body" value={post.body}/>
-                
-            <Button size="huge" onClick={() => router.back()}>
-              Back
-            </Button>
-            
-            <Button size="huge" color="red" onClick={() => setOpen(true)}> 
-              Delete
-            </Button>
-
-            <Button size="huge" color="green" onClick={() => handleUpdate()}>
-              Edit
-            </Button>
-
-          </Container>
-        }
+              )}
+              
+            </Container>
+          }
 
         <Confirm
           open={open}
@@ -152,6 +161,7 @@ function PostDetailPage( {postId} ) {
           onCancel={() => setOpen(false)}
           onConfirm={handleDelete}
         />
+
         </Container>
 
       </>
